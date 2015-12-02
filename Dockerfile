@@ -13,7 +13,8 @@ RUN npm install -g pm2
 ADD / /home/ethercalc/application/
 RUN chown -R ethercalc /home/ethercalc/application
 WORKDIR /home/ethercalc/application
-RUN npm install --production
+RUN gosu ethercalc npm install
+RUN gosu ethercalc make
 
 USER ethercalc
 ENV HOME /home/ethercalc
