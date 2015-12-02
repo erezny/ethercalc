@@ -37,7 +37,7 @@ manifest ::
 	perl -pi -e 's/# [A-Z].*\n/# @{[`date`]}/m' manifest.appcache
 
 app.js ::
-		env PATH="$$PATH:./node_modules/livescript/bin" lsc -m linked -c -o . src
+	env PATH="$$PATH:./node_modules/livescript/bin" lsc -m linked -c -o . src
 
 vm :: SocialCalcModule.js
 	env PATH="$$PATH:./node_modules/livescript/bin" lsc -m linked -c -o . src
