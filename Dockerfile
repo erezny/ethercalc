@@ -10,8 +10,9 @@ FROM node:0.10
 RUN useradd ethercalc --create-home
 RUN npm install -g pm2
 
-ADD / /ethercalc
-WORKDIR /ethercalc
+ADD / /home/ethercalc/application/
+RUN chown -R ethercalc /home/ethercalc/application
+WORKDIR /home/ethercalc/application
 RUN npm install --production
 
 USER ethercalc
