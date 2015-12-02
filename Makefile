@@ -20,6 +20,10 @@ ETHERCALC_FILES=\
 JS_FILES=\
 	app.js dotcloud.js player.js main.js sc.js db.js
 
+MAP_FILES=\
+		app.js.map dotcloud.js.map player.js.map main.js.map sc.js.map db.js.map \
+		player-broadcast.js.map player-graph.js.map
+
 UGLIFYJS_ARGS = -c -m
 ifdef DEBUG
   UGLIFYJS_ARGS += -b
@@ -31,6 +35,9 @@ all :: depends
 
 manifest ::
 	perl -pi -e 's/# [A-Z].*\n/# @{[`date`]}/m' manifest.appcache
+
+app.js ::
+		env PATH="$$PATH:./node_modules/livescript/bin" lsc -m linked -c -o . src
 
 vm :: SocialCalcModule.js
 	env PATH="$$PATH:./node_modules/livescript/bin" lsc -m linked -c -o . src
@@ -64,7 +71,7 @@ static/ethercalc.js: $(ETHERCALC_FILES) SocialCalcModule.js
 	sass -t compressed $< > $@
 
 clean ::
-	@-rm $(JS_FILES)
+	@-rm $(JS_FILES) $(MAP_FILES)
 
 push ::
 	dotcloud push ethercalc

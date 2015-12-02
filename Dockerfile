@@ -14,7 +14,7 @@ ADD / /home/ethercalc/application/
 RUN chown -R ethercalc /home/ethercalc/application
 WORKDIR /home/ethercalc/application
 RUN npm install
-RUN make
+RUN make depends
 
 USER ethercalc
 ENV HOME /home/ethercalc
